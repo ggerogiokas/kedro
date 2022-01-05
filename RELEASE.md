@@ -1,17 +1,18 @@
-# Upcoming Release 0.17.6
+# Release 0.17.6
 
 ## Major features and improvements
 * Added `pipelines` global variable to IPython extension, allowing you to access the project's pipelines in `kedro ipython` or `kedro jupyter notebook`.
 * Enabled overriding nested parameters with `params` in CLI, i.e. `kedro run --params="model.model_tuning.booster:gbtree"` updates parameters to `{"model": {"model_tuning": {"booster": "gbtree"}}}`.
 * Added option to `pandas.SQLQueryDataSet` to specify a `filepath` with a SQL query, in addition to the current method of supplying the query itself in the `sql` argument.
 * Extended `ExcelDataSet` to support saving Excel files with multiple sheets.
-* Added the following new dataset (see ([Issue #839](https://github.com/quantumblacklabs/kedro/issues/839)):
+* Added the following new datasets:
 
 | Type                        | Description                                          | Location                          |
 | --------------------------- | ---------------------------------------------------- | --------------------------------- |
 | `plotly.JSONDataSet` | Works with plotly graph object Figures (saves as json file) | `kedro.extras.datasets.plotly` |
 | `pandas.GenericDataSet` | Provides a 'best effort' facility to read / write any format provided by the `pandas` library | `kedro.extras.datasets.pandas` |
 | `pandas.GBQQueryDataSet` | Loads data from a Google Bigquery table using provided SQL query | `kedro.extras.datasets.pandas` |
+| `spark.DeltaTableDataSet` | Dataset designed to handle Delta Lake Tables and their CRUD-style operations, including `update`, `merge` and `delete` | `kedro.extras.datasets.spark` |
 
 ## Bug fixes and other changes
 * Fixed an issue where `kedro new --config config.yml` was ignoring the config file when `prompts.yml` didn't exist.
@@ -31,8 +32,8 @@
 * Deprecated the "Thanks for supporting contributions" section of release notes to simplify the contribution process; Kedro 0.17.6 is the last release that includes this. This process has been replaced with the [automatic GitHub feature](https://github.com/quantumblacklabs/kedro/graphs/contributors).
 * Fixed a bug where the version on the tracking datasets didn't match the session id and the versions of regular versioned datasets.
 * Fixed an issue where datasets in `load_versions` that are not found in the data catalog would silently pass.
-
-## Minor breaking changes to the API
+* Altered the string representation of nodes so that node inputs/outputs order is preserved rather than being alphabetically sorted.
+* Update `APIDataSet` to accept `auth` through `credentials` and allow any iterable for `auth`.
 
 ## Upcoming deprecations for Kedro 0.18.0
 * `kedro.extras.decorators` and `kedro.pipeline.decorators` are being deprecated in favour of Hooks.

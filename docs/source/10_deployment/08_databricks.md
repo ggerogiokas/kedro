@@ -1,6 +1,6 @@
 # Deployment to a Databricks cluster
 
-This tutorial uses the [PySpark Iris Kedro Starter](https://github.com/quantumblacklabs/kedro-starters/tree/master/pyspark-iris) to illustrate how to bootstrap a Kedro project using Spark and deploy it to a [Databricks cluster on AWS](https://databricks.com/aws). It is split into 2 sections:
+This tutorial uses the [PySpark Iris Kedro Starter](https://github.com/quantumblacklabs/kedro-starters/tree/main/pyspark-iris) to illustrate how to bootstrap a Kedro project using Spark and deploy it to a [Databricks cluster on AWS](https://databricks.com/aws). It is split into 2 sections:
 
 * [Databricks Connect workflow](#run-the-kedro-project-with-databricks-connect) (recommended)
 * [Databricks Notebook workflow](#run-kedro-project-from-a-databricks-notebook) (the setup of this is more involved)
@@ -33,7 +33,7 @@ conda create --name iris_databricks python=3.7 -y
 conda activate iris_databricks
 
 # install Kedro and create a new project
-pip install "kedro~=0.17.5"
+pip install "kedro~=0.17.6"
 # name your project Iris Databricks when prompted for it
 kedro new --starter pyspark-iris
 ```
@@ -271,7 +271,7 @@ git remote add origin git@github.com:<username>/<repo-name>.git
 git remote -v
 
 # push the first commit
-git push --set-upstream origin master
+git push --set-upstream origin main
 ```
 
 ### 5. Configure the Databricks cluster
@@ -308,13 +308,13 @@ In your newly created notebook put each code snippet from below into a separate 
 * Clone your project from GitHub
 
 ```console
-%sh rm -rf ~/projects/iris-databricks && git clone --single-branch --branch master https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/<your-repo-name>.git ~/projects/iris-databricks
+%sh rm -rf ~/projects/iris-databricks && git clone --single-branch --branch main https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/<your-repo-name>.git ~/projects/iris-databricks
 ```
 
-* Install the latest version of Kedro compatible with version `0.17.5`
+* Install the latest version of Kedro compatible with version `0.17.6`
 
 ```console
-%pip install "kedro[spark.SparkDataSet]~=0.17.5"
+%pip install "kedro[spark.SparkDataSet]~=0.17.6"
 ```
 
 * Copy input data into DBFS
